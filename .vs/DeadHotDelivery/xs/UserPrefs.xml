@@ -1,17 +1,17 @@
 ﻿<Properties StartupConfiguration="{B9A39548-BD13-A155-606E-89D885885F47}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerCollision.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/QuestController.cs">
     <Files>
       <File FileName="Assets/Scripts/PlayerMovement.cs" Line="17" Column="56" />
-      <File FileName="Assets/PlayerCollision.cs" Line="18" Column="1" />
+      <File FileName="Assets/PlayerCollision.cs" Line="19" Column="30" />
+      <File FileName="Assets/QuestController.cs" Line="7" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DeadHotDelivery" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="PlayerCollision.cs" selected="True" />
-              </Node>
+              <Node name="Scripts" expanded="True" />
+              <Node name="QuestController.cs" selected="True" />
             </Node>
           </Node>
         </State>

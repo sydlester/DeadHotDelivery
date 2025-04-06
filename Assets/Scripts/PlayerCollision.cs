@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private bool hasPizza = false;
+    
+    public QuestController questController;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Pizza")
+        if (collision.gameObject.name == "Cheese" && questController.pizzaType == 0 && !questController.hasPizza)
         {
-            Debug.Log("Pizza Collected");
-            hasPizza = true;
+            questController.hasPizza = true;
+            questController.SetQuest("Deliver the pizza to the house");
         }
 
-        if (collision.gameObject.tag == "DeliveryHouse" && hasPizza)
+        if (collision.gameObject.name == "Veggie" && questController.pizzaType == 1 && !questController.hasPizza)
         {
-            Debug.Log("Pizza Delivered");
-            hasPizza = false;
+            questController.hasPizza = true;
+            questController.SetQuest("Deliver the pizza to the house");
+
+        }
+
+        if (collision.gameObject.name == "Pepperoni" && questController.pizzaType == 2 && !questController.hasPizza)
+        {
+            questController.hasPizza = true;
+            questController.SetQuest("Deliver the pizza to the house");
+        }
+
+        if (collision.gameObject.tag == "DeliveryHouse" && questController.hasPizza)
+        {
+            questController.SetQuest("You win!");
+            questController.hasPizza = false;
         }
     }
 }
