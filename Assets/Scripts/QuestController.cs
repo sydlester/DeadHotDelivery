@@ -11,6 +11,10 @@ public class QuestController : MonoBehaviour
     Stack<List<int>> pizzaOrders;
     List<int> currentOrder;
     public GameObject currentHouse;
+    [SerializeField] InventoryManager inventoryManager;
+
+    /// PIZZZAs= 0 is cheese, 1 is veggie and 2 is pepperoni
+    
 
     private void Start()
     {
@@ -21,8 +25,8 @@ public class QuestController : MonoBehaviour
         GenerateHouses();
         GeneratePizzas();
 
-        //PizzaQuest();
-        DeliveryQuest();
+        PizzaQuest();
+        //DeliveryQuest();
     }
 
     private void GenerateHouses()
@@ -43,15 +47,17 @@ public class QuestController : MonoBehaviour
         //run for loop for each house
         for (int i = 0; i < deliveryHouses.ToArray().Length; i++)
         {
-            // generate random number of pizzas for order
+            // generate random number of pizzas for order between 1 and 3
             int numPizzas = Random.Range(1, 4);
             List<int> pizzasToDeliver = new List<int>();
-            //add random pizza type
+            //add random pizza type for each num of pizza
             for (int j = 0; j < numPizzas; j++)
             {
                 pizzasToDeliver.Add(Random.Range(0, 3));
             }
             pizzaOrders.Push(pizzasToDeliver);
+
+            //Ex. [0,2,2] for 1 cheese, 2 pepperoni
         }
 
     }
@@ -59,7 +65,16 @@ public class QuestController : MonoBehaviour
 
     public void PizzaQuest()
     {
-        currentOrder = pizzaOrders.Pop();
+        if (pizzaOrders.Count > 0)
+        {
+            currentOrder = pizzaOrders.Pop();
+        }
+        else
+        {
+            currentOrder = null; // or handle as "no more orders"
+            Debug.Log("No more pizza orders left!");
+        }
+
 
         string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
         Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
@@ -90,6 +105,34 @@ public class QuestController : MonoBehaviour
 
         string order = string.Join(", ", orderParts);
         SetQuest("Order: " + order);
+    }
+
+    public bool HasRequiredPizzas()
+    {
+        Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
+
+        foreach (int pizza in currentOrder)
+        {
+            if (!pizzaCount.ContainsKey(pizza))
+                pizzaCount[pizza] = 0;
+
+            pizzaCount[pizza]++;
+        }
+
+        string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
+
+        foreach (var pair in pizzaCount)
+        {
+            int type = pair.Key;
+            int requiredAmount = pair.Value;
+
+            int ownedAmount = inventoryManager.GetItemCount(type);
+
+            if (ownedAmount < requiredAmount)
+                return false;
+        }
+
+        return true;
     }
 
     public void DeliveryQuest()
