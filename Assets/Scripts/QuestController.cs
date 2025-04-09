@@ -9,10 +9,21 @@ public class QuestController : MonoBehaviour
     public int pizzaType;
     string pizzaName = "";
     public bool hasPizza = false;
+    private GameObject[] houses;
+    public GameObject deliveryHouse;
 
     private void Start()
     {
         pizzaType = Random.Range(0, 3);
+        houses = GameObject.FindGameObjectsWithTag("House");
+        if (houses.Length > 0)
+        {
+            deliveryHouse = houses[Random.Range(0, houses.Length)];
+        }
+        else
+        {
+            Debug.LogWarning("No houses found with tag 'House'");
+        }
         PizzaQuest();
     }
 
