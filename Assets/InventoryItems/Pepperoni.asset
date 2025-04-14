@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pepperoni
   m_EditorClassIdentifier: 
   name: Pepperoni
+  num: 2
   icon: {fileID: 21300000, guid: 28099a540a8214e2e85cc3fde4ae82cb, type: 3}
   prefab: {fileID: 0}
   maxStack: 0
