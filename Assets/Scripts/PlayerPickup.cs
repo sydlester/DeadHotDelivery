@@ -3,40 +3,40 @@ using UnityEngine;
 using TMPro;
 public class PlayerPickup : MonoBehaviour
 {
-    public InventoryManager im;
+    public InventoryManager inventoryManager;
     public float pickupRadius = 1.5f;
-    public GameObject pickupPopup; // assign this in Inspector
+    public GameObject pickupPopup; 
 
 
     void Update()
     {
+        //Find nearest item, if its within radius, allow it to be picked up
         GameObject nearestItem = FindNearestPickable();
         bool showPopup = false;
 
-        if (nearestItem != null)
+        if (nearestItem != null && inventoryManager.NeedMoreOfPizzaType(nearestItem))
         {
             float distance = Vector2.Distance(transform.position, nearestItem.transform.position);
 
             if (distance <= pickupRadius)
             {
                 showPopup = true;
-
-                if (Input.GetKeyDown(KeyCode.E)) // or MouseButtonDown(0)
+                if (Input.GetKeyDown(KeyCode.E )) 
                 {
-                    im.ItemPicked(nearestItem);
+                    inventoryManager.ItemPicked(nearestItem);
+                    showPopup = false;
                 }
             }
         }
 
-        // Show or hide the popup
         if (pickupPopup != null)
             pickupPopup.SetActive(showPopup);
     }
 
-
+    //Finds nearest pizza
     GameObject FindNearestPickable()
     {
-        GameObject[] pickables = GameObject.FindGameObjectsWithTag("Pizza"); // Add this tag to all pickable items
+        GameObject[] pickables = GameObject.FindGameObjectsWithTag("Pizza"); 
         GameObject closest = null;
         float closestDist = pickupRadius;
 

@@ -9,9 +9,10 @@ public class QuestController : MonoBehaviour
     private GameObject[] houses;
     public Stack<GameObject> deliveryHouses;
     Stack<List<int>> pizzaOrders;
-    List<int> currentOrder;
+    public List<int> currentOrder;
     public GameObject currentHouse;
     [SerializeField] InventoryManager inventoryManager;
+    [SerializeField] GameController gameController;
 
     /// PIZZZAs= 0 is cheese, 1 is veggie and 2 is pepperoni
     
@@ -22,13 +23,14 @@ public class QuestController : MonoBehaviour
         deliveryHouses = new Stack<GameObject>();
         pizzaOrders = new Stack<List<int>>();
 
+        //generate orders
         GenerateHouses();
         GeneratePizzas();
 
         PizzaQuest();
-        //DeliveryQuest();
     }
 
+    //Generates 2 random houses out of the buldings tagged "House"
     private void GenerateHouses()
     {
         int index1 = Random.Range(0, houses.Length);
@@ -43,6 +45,7 @@ public class QuestController : MonoBehaviour
         deliveryHouses.Push(houses[index2]);
     }
 
+    //Generates 1 to 3 pizzas for each house
     private void GeneratePizzas() {
         //run for loop for each house
         for (int i = 0; i < deliveryHouses.ToArray().Length; i++)
@@ -65,83 +68,90 @@ public class QuestController : MonoBehaviour
 
     public void PizzaQuest()
     {
-        if (pizzaOrders.Count > 0)
+        //If there are no more orders in stack, player wins game
+        if (pizzaOrders.Count <= 0)
         {
-            currentOrder = pizzaOrders.Pop();
+            currentOrder = null;
+            gameController.Win();
         }
         else
         {
-            currentOrder = null; // or handle as "no more orders"
-            Debug.Log("No more pizza orders left!");
-        }
+            //Pop current order from stack
+            currentOrder = pizzaOrders.Pop();
+            string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
+            Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
 
-
-        string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
-        Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
-
-        // Count each pizza type
-        foreach (int pizza in currentOrder)
-        {
-            if (!pizzaCount.ContainsKey(pizza))
+            // Count each pizza type
+            foreach (int pizza in currentOrder)
             {
-                pizzaCount[pizza] = 0;
+                if (!pizzaCount.ContainsKey(pizza))
+                {
+                    pizzaCount[pizza] = 0;
+                }
+                pizzaCount[pizza]++;
             }
-            pizzaCount[pizza]++;
-        }
 
-        // Format order string like "2 pepperoni, 1 cheese"
-        List<string> orderParts = new List<string>();
-        foreach (var pair in pizzaCount)
-        {
-            int flavor = pair.Key;
-            int count = pair.Value;
-
-            if (flavor >= 0 && flavor < pizzaNames.Length)
+            // Format order string like "2 pepperoni, 1 cheese"
+            List<string> orderParts = new List<string>();
+            foreach (var pair in pizzaCount)
             {
-                string part = count + " " + pizzaNames[flavor];
-                orderParts.Add(part);
-            }
-        }
+                int flavor = pair.Key;
+                int count = pair.Value;
 
-        string order = string.Join(", ", orderParts);
-        SetQuest("Order: " + order);
+                if (flavor >= 0 && flavor < pizzaNames.Length)
+                {
+                    string part = count + " " + pizzaNames[flavor];
+                    orderParts.Add(part);
+                }
+            }
+
+            string order = string.Join(", ", orderParts);
+            SetQuest("Order: " + order);
+        }
     }
 
+    //Checks if player has all of the pizzas in order in their inventory
     public bool HasRequiredPizzas()
     {
-        Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
-
-        foreach (int pizza in currentOrder)
+        if (currentOrder != null)
         {
-            if (!pizzaCount.ContainsKey(pizza))
-                pizzaCount[pizza] = 0;
+            Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
 
-            pizzaCount[pizza]++;
+            //Counting pizzas in current order
+            foreach (int pizza in currentOrder)
+            {
+                if (!pizzaCount.ContainsKey(pizza))
+                    pizzaCount[pizza] = 0;
+
+                pizzaCount[pizza]++;
+            }
+
+            //Compares each owned amount to current order amount
+            foreach (var pair in pizzaCount)
+            {
+                int type = pair.Key;
+                int requiredAmount = pair.Value;
+
+                int ownedAmount = inventoryManager.GetItemCount(type);
+
+                if (ownedAmount < requiredAmount)
+                    return false;
+            }
+
+            return true;
         }
-
-        string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
-
-        foreach (var pair in pizzaCount)
-        {
-            int type = pair.Key;
-            int requiredAmount = pair.Value;
-
-            int ownedAmount = inventoryManager.GetItemCount(type);
-
-            if (ownedAmount < requiredAmount)
-                return false;
-        }
-
-        return true;
+        else
+           return false;
     }
 
+    //Sets quest to delivery
     public void DeliveryQuest()
     {
         currentHouse = deliveryHouses.Pop();
         SetQuest("Deliver the pizza to " + currentHouse.name);
     }
 
-
+    //Sets top left UI text
     public void SetQuest(string quest)
     {
         questText.text = quest;
