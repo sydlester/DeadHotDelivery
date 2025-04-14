@@ -859,7 +859,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -3805596438754275810, guid: cdba908f7841b4b239624de2dcdd03ff, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1981,6 +1982,7 @@ GameObject:
   - component: {fileID: 1506372981}
   - component: {fileID: 1506372982}
   - component: {fileID: 1506372983}
+  - component: {fileID: 1506372984}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2295,6 +2297,19 @@ MonoBehaviour:
   dropRadius: 1.5
   dropPopup: {fileID: 337766472}
   questController: {fileID: 1039875573}
+--- !u!114 &1506372984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506372974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4871de544c6054c29b895e99d2dd3127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitRadius: 1.5
 --- !u!1 &1706425962
 GameObject:
   m_ObjectHideFlags: 0
