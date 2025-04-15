@@ -50,3 +50,12 @@ TagManager:
   - name: Walk In Front
     uniqueID: 802446669
     locked: 0
+  - name: Collision
+    uniqueID: 1283322635
+    locked: 0
+  - name: Player
+    uniqueID: 3441780311
+    locked: 0
+  - name: Decor
+    uniqueID: 2888017751
+    locked: 0
