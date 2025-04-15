@@ -33,6 +33,10 @@ public class QuestController : MonoBehaviour
     //Generates 2 random houses out of the buldings tagged "House"
     private void GenerateHouses()
     {
+        if (houses.Length == 0)
+        {
+            return;
+        }
         int index1 = Random.Range(0, houses.Length);
         int index2;
 
@@ -147,6 +151,11 @@ public class QuestController : MonoBehaviour
     //Sets quest to delivery
     public void DeliveryQuest()
     {
+        if (deliveryHouses.Count <= 0)
+        {
+            SetQuest("Deliver the pizza to [null]");
+            return;
+        }
         currentHouse = deliveryHouses.Pop();
         SetQuest("Deliver the pizza to " + currentHouse.name);
     }
