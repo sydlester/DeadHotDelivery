@@ -7,7 +7,7 @@ public class UpdateLocation : MonoBehaviour
     public GameObject player;
     private Vector3 offset = new Vector3(0.75f, -0.5f, 0); // Offset to position the object above the player
     [SerializeField] public bool inUse = false;
-    public string weaponName = "Knife"; // Default weapon name
+    public string weaponName; // Default weapon name
 
     // Start is called before the first frame update
     void Start()

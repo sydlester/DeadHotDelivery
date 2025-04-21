@@ -14,6 +14,7 @@ public class SwitchWeapon : MonoBehaviour
         updateLocation = GetComponent<UpdateLocation>();
         player = GameObject.FindGameObjectWithTag("Player");
         manageWeapons = player.GetComponent<ManagePlayerWeapon>();
+        // Debug.Log("SwitchWeapon: Start");
     }
 
     // Update is called once per frame
@@ -24,11 +25,15 @@ public class SwitchWeapon : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("SwitchWeapon: OnTriggerEnter2D");
         if (other.CompareTag("Weapon"))
         {
+            Debug.Log("SwitchWeapon: OnTriggerEnter2D - Weapon");
             // only trigger for one of the two weapons
             if (updateLocation.inUse)
             {
+                // highlight the weapon
+                other.GetComponent<SpriteRenderer>().color = Color.yellow;
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     SwitchWeaponTo(other);
@@ -42,6 +47,18 @@ public class SwitchWeapon : MonoBehaviour
                         manageWeapons.SwitchPlayerWeapon("Knife");
                     }     
                 }
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            if (updateLocation.inUse)
+            {
+                // reset color
+                other.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
     }

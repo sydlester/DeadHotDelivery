@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4822078587632993071
+--- !u!1 &2746735027841701225
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3887158624054311332}
-  - component: {fileID: 8475553345294527483}
-  - component: {fileID: 1107230084251874547}
-  - component: {fileID: 9050842047510042655}
-  - component: {fileID: 7428773395347934264}
+  - component: {fileID: 2320217393614683376}
+  - component: {fileID: 8698980281296430553}
+  - component: {fileID: 4525523976163458369}
+  - component: {fileID: 168899970862420959}
+  - component: {fileID: 6967284873310411021}
   m_Layer: 7
-  m_Name: Knife
+  m_Name: Sword
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3887158624054311332
+--- !u!4 &2320217393614683376
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822078587632993071}
+  m_GameObject: {fileID: 2746735027841701225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 4.0745354e-10, w: 1}
-  m_LocalPosition: {x: 1.0700002, y: -0.69, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.328531, y: -0.035386432, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8475553345294527483
+--- !u!212 &8698980281296430553
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822078587632993071}
+  m_GameObject: {fileID: 2746735027841701225}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -853186985
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4d8a70544bcea421f95660b6f0ffbea7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1761088d825e4a0d89c7b77b1ad2945, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,13 +87,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1107230084251874547
+--- !u!114 &4525523976163458369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822078587632993071}
+  m_GameObject: {fileID: 2746735027841701225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed02f17ddf554ed3abfc0a0105b0a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &168899970862420959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2746735027841701225}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bce169731a2cf4fbbb4a00390743edf3, type: 3}
@@ -102,25 +114,13 @@ MonoBehaviour:
   player: {fileID: 0}
   inUse: 0
   weaponName: Knife
---- !u!114 &9050842047510042655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822078587632993071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed02f17ddf554ed3abfc0a0105b0a84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &7428773395347934264
+--- !u!61 &6967284873310411021
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822078587632993071}
+  m_GameObject: {fileID: 2746735027841701225}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
