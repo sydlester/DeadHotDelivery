@@ -6,7 +6,7 @@ public class PlayerDropOff : MonoBehaviour
     public InventoryManager im;
     public float dropRadius = 1.5f;
     public GameObject dropPopup; 
-    [SerializeField] QuestController questController;
+    [SerializeField] DeliveryQuestController questController;
     [SerializeField] DeliveryData deliveryData;
 
     void Update()
@@ -15,20 +15,18 @@ public class PlayerDropOff : MonoBehaviour
         GameObject nearestItem = FindNearestDropable();
         if (nearestItem != null)
         {
-            Debug.Log("Nearest item: " + nearestItem.name);
             float distance = Vector2.Distance(transform.position, nearestItem.transform.position);
             //If inside radius, show drop option and allow the player to deliver
             if (distance <= dropRadius)
             {
                 showPopup = true;
-                Debug.Log("Drop popup active");
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     if (questController.currentHouse.name == nearestItem.name)
                     {
                         im.ClearInventory();
                         showPopup = false;
-                        questController.PizzaQuest();
+                        questController.SetQuest("Return to the Pizza Place!");
                     }
                     else
                     {
@@ -45,10 +43,10 @@ public class PlayerDropOff : MonoBehaviour
     GameObject FindNearestDropable()
     {
         GameObject[] dropables = GameObject.FindGameObjectsWithTag("House"); 
-        Debug.Log("Dropables: " + dropables.Length);
         GameObject closest = null;
         float closestDist = dropRadius;
-
+        // Debug.Log(deliveryData.houses.Length);
+        // Debug.Log(deliveryData.deliveryHouses.Count);
         foreach (GameObject item in dropables)
         {
             float dist = Vector2.Distance(transform.position, item.transform.position);
