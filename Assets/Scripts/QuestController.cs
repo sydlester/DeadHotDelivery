@@ -6,112 +6,65 @@ using TMPro;
 public class QuestController : MonoBehaviour
 {
     public TMP_Text questText;
-    private GameObject[] houses;
+    
+    [SerializeField] InventoryManager inventoryManager;
+    [SerializeField] DeliveryData deliveryData;
     public Stack<GameObject> deliveryHouses;
-    Stack<List<int>> pizzaOrders;
+    public Stack<List<int>> pizzaOrders;
     public List<int> currentOrder;
     public GameObject currentHouse;
-    [SerializeField] InventoryManager inventoryManager;
-    [SerializeField] GameController gameController;
 
     /// PIZZZAs= 0 is cheese, 1 is veggie and 2 is pepperoni
-    
 
-    private void Start()
+    void Start()
     {
-        houses = GameObject.FindGameObjectsWithTag("House");
-        deliveryHouses = new Stack<GameObject>();
-        pizzaOrders = new Stack<List<int>>();
+        deliveryData.Initialize();
+    }
 
-        //generate orders
-        GenerateHouses();
-        GeneratePizzas();
-
+    public void Setup()
+    {
+        Debug.Log("Setup");
+        deliveryHouses = deliveryData.deliveryHouses;
+        pizzaOrders = deliveryData.pizzaOrders;
         PizzaQuest();
-    }
-
-    //Generates 2 random houses out of the buldings tagged "House"
-    private void GenerateHouses()
-    {
-        if (houses.Length == 0)
-        {
-            return;
-        }
-        int index1 = Random.Range(0, houses.Length);
-        int index2;
-
-        do
-        {
-            index2 = Random.Range(0, houses.Length);
-        } while (index2 == index1);
-
-        deliveryHouses.Push(houses[index1]);
-        deliveryHouses.Push(houses[index2]);
-    }
-
-    //Generates 1 to 3 pizzas for each house
-    private void GeneratePizzas() {
-        //run for loop for each house
-        for (int i = 0; i < deliveryHouses.ToArray().Length; i++)
-        {
-            // generate random number of pizzas for order between 1 and 3
-            int numPizzas = Random.Range(1, 4);
-            List<int> pizzasToDeliver = new List<int>();
-            //add random pizza type for each num of pizza
-            for (int j = 0; j < numPizzas; j++)
-            {
-                pizzasToDeliver.Add(Random.Range(0, 3));
-            }
-            pizzaOrders.Push(pizzasToDeliver);
-
-            //Ex. [0,2,2] for 1 cheese, 2 pepperoni
-        }
-
     }
 
 
     public void PizzaQuest()
     {
-        //If there are no more orders in stack, player wins game
-        if (pizzaOrders.Count <= 0)
+        deliveryData.NewOrder();
+        currentOrder = deliveryData.currentOrder;
+        currentHouse = deliveryData.currentHouse;
+        string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
+        Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
+
+        // Count each pizza type
+        foreach (int pizza in currentOrder)
         {
-            currentOrder = null;
-            gameController.Win();
+            if (!pizzaCount.ContainsKey(pizza))
+            {
+                pizzaCount[pizza] = 0;
+            }
+            pizzaCount[pizza]++;
         }
-        else
+
+        // Format order string like "2 pepperoni, 1 cheese"
+        List<string> orderParts = new List<string>();
+        foreach (var pair in pizzaCount)
         {
-            //Pop current order from stack
-            currentOrder = pizzaOrders.Pop();
-            string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
-            Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
+            int flavor = pair.Key;
+            int count = pair.Value;
 
-            // Count each pizza type
-            foreach (int pizza in currentOrder)
+            if (flavor >= 0 && flavor < pizzaNames.Length)
             {
-                if (!pizzaCount.ContainsKey(pizza))
-                {
-                    pizzaCount[pizza] = 0;
-                }
-                pizzaCount[pizza]++;
+                string part = count + " " + pizzaNames[flavor];
+                orderParts.Add(part);
             }
-
-            // Format order string like "2 pepperoni, 1 cheese"
-            List<string> orderParts = new List<string>();
-            foreach (var pair in pizzaCount)
-            {
-                int flavor = pair.Key;
-                int count = pair.Value;
-
-                if (flavor >= 0 && flavor < pizzaNames.Length)
-                {
-                    string part = count + " " + pizzaNames[flavor];
-                    orderParts.Add(part);
-                }
-            }
-
-            string order = string.Join(", ", orderParts);
-            SetQuest("Order: " + order);
         }
+
+        string order = string.Join(", ", orderParts);
+        SetQuest("Order: " + order);
+    
     }
 
     //Checks if player has all of the pizzas in order in their inventory
@@ -151,12 +104,11 @@ public class QuestController : MonoBehaviour
     //Sets quest to delivery
     public void DeliveryQuest()
     {
-        if (deliveryHouses.Count <= 0)
+        if (deliveryHouses.Count < 0)
         {
             SetQuest("Deliver the pizza to [null]");
             return;
         }
-        currentHouse = deliveryHouses.Pop();
         SetQuest("Deliver the pizza to " + currentHouse.name);
     }
 
