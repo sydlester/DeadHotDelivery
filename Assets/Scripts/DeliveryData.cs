@@ -4,37 +4,34 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DeliveryData", menuName = "ScriptableObjects/DeliveryData", order = 1)]
 public class DeliveryData : ScriptableObject
 {
-    private GameObject[] houses;
-    public Stack<GameObject> deliveryHouses;
+    public GameObject[] houses;
+    public List<string> deliveryHouseNames = new List<string>();
     public Stack<List<int>> pizzaOrders;
     public List<int> currentOrder;
     public GameObject currentHouse;
-    private QuestController questController;
-
+    private PizzaQuestController questController;
 
     public void InitializePizza()
     {
-        questController = FindObjectOfType<QuestController>();
+        questController = FindObjectOfType<PizzaQuestController>();
 
-        deliveryHouses = new Stack<GameObject>();
+        houses = null;
+        deliveryHouseNames = new List<string>();
+        deliveryHouseNames.Clear();
         pizzaOrders = new Stack<List<int>>();
 
         GeneratePizzas();
         questController.Setup();
     }
-    public IEnumerator InitializeHouses()
-    {
-        houses = GameObject.FindGameObjectsWithTag("House");
-        GenerateHouses();
-        yield return new WaitForSeconds(2f);
-    }
-
 
     //Generates 2 random houses out of the buldings tagged "House"
-    private void GenerateHouses()
+    public void GenerateHouses()
     {
-        if (houses.Length == 0)
+        Debug.Log("Generating houses...");
+        houses = GameObject.FindGameObjectsWithTag("House");
+        if (houses.Length < 2)
         {
+            Debug.LogError("Not enough houses found! Need at least 2.");
             return;
         }
         int index1 = Random.Range(0, houses.Length);
@@ -45,8 +42,10 @@ public class DeliveryData : ScriptableObject
             index2 = Random.Range(0, houses.Length);
         } while (index2 == index1);
 
-        deliveryHouses.Push(houses[index1]);
-        deliveryHouses.Push(houses[index2]);
+        deliveryHouseNames.Clear(); // reset before storing new ones
+        deliveryHouseNames.Add(houses[index1].name);
+        deliveryHouseNames.Add(houses[index2].name);
+
     }
 
     //Generates 1 to 3 pizzas for each house
@@ -74,7 +73,6 @@ public class DeliveryData : ScriptableObject
         if (pizzaOrders.Count > 0)
         {
             currentOrder = pizzaOrders.Pop();
-            // currentHouse = deliveryHouses.Pop();
         }
     }
 }

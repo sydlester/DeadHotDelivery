@@ -10,14 +10,24 @@ public class InventoryManager : MonoBehaviour
     GameObject emptySlot = null;
     [SerializeField] GameObject[] slots = new GameObject[3];
     [SerializeField] GameObject itemPrefab;
-    [SerializeField] QuestController questController;
+    private QuestController questController;
     [SerializeField] PlayerPickup playerPickup;
     [SerializeField] PlayerDropOff playerDropOff;
     public Dictionary<int, int> inventoryCounts = new Dictionary<int, int>();
     public GameObject pickupPopup;
     public GameObject dropPopup;
 
-
+    void Start()
+    {
+        DeliveryQuestController deliveryController = FindObjectOfType<DeliveryQuestController>();
+        PizzaQuestController pizzaController = FindObjectOfType<PizzaQuestController>();
+        if (deliveryController != null)
+            questController = deliveryController;
+        else if (pizzaController != null)
+            questController = pizzaController;
+        else
+            Debug.LogError("No QuestController found in the scene.");
+    }
     //Puts an item into an inventory slot
     public void ItemPicked(GameObject pickedItem)
     {
@@ -54,9 +64,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         //if we have all of the pizzas, turn off the ability to grab more and start delivery quest
-        if (questController.HasRequiredPizzas())
+        if (((PizzaQuestController)questController).HasRequiredPizzas())
         {
-            questController.DeliveryQuest();
+            questController.SetQuest("Exit the pizza place!");
             playerPickup.enabled = false;
         }
     }
@@ -88,7 +98,7 @@ public class InventoryManager : MonoBehaviour
     {
         int pizzaType = pizza.GetComponent<ItemPickable>().itemScriptableObject.num;
         int inventoryCount = GetItemCount(pizza.GetComponent<ItemPickable>().itemScriptableObject.num);
-        foreach (int orderPizza in questController.currentOrder)
+        foreach (int orderPizza in ((PizzaQuestController)questController).currentOrder)
         {
             if (orderPizza == pizzaType)
                 inventoryCount--;
