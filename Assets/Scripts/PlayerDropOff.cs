@@ -15,13 +15,13 @@ public class PlayerDropOff : MonoBehaviour
         GameObject nearestItem = FindNearestDropable();
         if (nearestItem != null)
         {
-            Debug.Log("Nearest item: " + nearestItem.name);
+            // Debug.Log("Nearest item: " + nearestItem.name);
             float distance = Vector2.Distance(transform.position, nearestItem.transform.position);
             //If inside radius, show drop option and allow the player to deliver
             if (distance <= dropRadius)
             {
                 showPopup = true;
-                Debug.Log("Drop popup active");
+                // Debug.Log("Drop popup active");
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     if (questController.currentHouse.name == nearestItem.name)
@@ -45,7 +45,7 @@ public class PlayerDropOff : MonoBehaviour
     GameObject FindNearestDropable()
     {
         GameObject[] dropables = GameObject.FindGameObjectsWithTag("House"); 
-        Debug.Log("Dropables: " + dropables.Length);
+        // Debug.Log("Dropables: " + dropables.Length);
         GameObject closest = null;
         float closestDist = dropRadius;
 

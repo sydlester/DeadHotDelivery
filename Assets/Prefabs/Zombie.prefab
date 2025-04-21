@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6436521582644963808}
   - component: {fileID: -1406991878526357617}
   - component: {fileID: 2923866474527075361}
+  - component: {fileID: 7490041408744773919}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Zombie
@@ -130,6 +131,8 @@ MonoBehaviour:
   moveSpeed: 1
   frameCount: 0
   maxFrameCount: 500
+  rb: {fileID: 0}
+  canMove: 1
 --- !u!60 &-1406991878526357617
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -194,3 +197,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  spriteRenderer: {fileID: 0}
+  moveZombie: {fileID: 0}
+--- !u!114 &7490041408744773919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287536856139032803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3671f54e576d4de3aaef0babe7ec892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
