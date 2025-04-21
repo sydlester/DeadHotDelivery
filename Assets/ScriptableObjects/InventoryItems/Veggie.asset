@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Veggie
   num: 1
-  icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: 56455026ec48a48cb9f2f1da48918e13, type: 3}
   prefab: {fileID: 0}
   maxStack: 0
