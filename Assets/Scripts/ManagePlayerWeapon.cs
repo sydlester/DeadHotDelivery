@@ -2,36 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Weapon
+
+public class ManagePlayerWeapon : MonoBehaviour
 {
-    public string name;
-    public int damage;
-    public float range;
-    public float cd;
-}
-
-public class ManageWeapons : MonoBehaviour
-{
-
-    public Weapon knife = new Weapon {
-        name = "Knife",
-        damage = 25,
-        range = 5f,
-        cd = 0.25f,
-    };
-    
-    public Weapon sword = new Weapon {
-        name = "Sword",
-        damage = 50,
-        range = 7f,
-        cd = 0.25f,
-    };
-
     public Weapon playerWeapon;
+    public WeaponManager weaponManager;
     // Start is called before the first frame update
     void Start()
     {
         // Initialize the player's weapon to the knife 
+        GameObject weaponManagerObject = GameObject.Find("WeaponManager");
+        weaponManager = weaponManagerObject.GetComponent<WeaponManager>();
+        Weapon knife = weaponManager.GetWeapon("Knife");
+
         playerWeapon = new Weapon();
         playerWeapon.name = knife.name;
         playerWeapon.damage = knife.damage;
@@ -45,5 +28,11 @@ public class ManageWeapons : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SwitchPlayerWeapon(string weaponName)
+    {
+        playerWeapon = weaponManager.GetWeapon(weaponName);
+        Debug.Log("Switched to weapon: " + playerWeapon.name);
     }
 }
