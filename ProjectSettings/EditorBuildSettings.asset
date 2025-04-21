@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Phoebe Street.unity
     guid: 03fb48538053541c585af5bb35bcd505
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: 90e56d58cd89642d1bfc7754765d2289
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 52cf77a4c65b84adda96a7b6721702e4
   m_configObjects: {}
