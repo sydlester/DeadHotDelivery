@@ -24,6 +24,7 @@ public class PlayerDropOff : MonoBehaviour
                 {
                     if (questController.currentHouse.name == nearestItem.name)
                     {
+                        nearestItem.GetComponent<AudioSource>().Play();
                         im.ClearInventory();
                         showPopup = false;
                         questController.SetQuest("Return to the Pizza Place!");

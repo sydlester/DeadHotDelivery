@@ -89,6 +89,7 @@ public class InventoryManager : MonoBehaviour
         playerDropOff.enabled = false;
         dropPopup.SetActive(false);
         exit.SetActive(true);
+        
     }
 
     //Returns count of pizza in inventory

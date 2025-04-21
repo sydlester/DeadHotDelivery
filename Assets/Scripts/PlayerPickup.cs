@@ -23,6 +23,7 @@ public class PlayerPickup : MonoBehaviour
                 showPopup = true;
                 if (Input.GetKeyDown(KeyCode.E )) 
                 {
+                    nearestItem.GetComponent<AudioSource>().Play();
                     inventoryManager.ItemPicked(nearestItem);
                     showPopup = false;
                 }
