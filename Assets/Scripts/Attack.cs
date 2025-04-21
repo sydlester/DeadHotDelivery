@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        weapon = GetComponent<ManageWeapons>().playerWeapon; // Get the player's weapon from the ManageWeapons script    }
+        weapon = GetComponent<ManagePlayerWeapon>().playerWeapon; // Get the player's weapon from the ManageWeapons script    }
         if (Time.time >= nextAttackTime)
         {
             CheckAttack();
