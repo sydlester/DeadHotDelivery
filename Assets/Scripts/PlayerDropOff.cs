@@ -43,10 +43,6 @@ public class PlayerDropOff : MonoBehaviour
     GameObject FindNearestDropable()
     {
         GameObject[] dropables = GameObject.FindGameObjectsWithTag("House"); 
-<<<<<<< HEAD
-=======
-        // Debug.Log("Dropables: " + dropables.Length);
->>>>>>> main
         GameObject closest = null;
         float closestDist = dropRadius;
         // Debug.Log(deliveryData.houses.Length);
