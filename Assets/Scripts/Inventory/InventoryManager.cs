@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<int, int> inventoryCounts = new Dictionary<int, int>();
     public GameObject pickupPopup;
     public GameObject dropPopup;
+    [SerializeField] GameObject exit;
 
     void Start()
     {
@@ -68,6 +69,7 @@ public class InventoryManager : MonoBehaviour
         {
             questController.SetQuest("Exit the pizza place!");
             playerPickup.enabled = false;
+            exit.SetActive(true);
         }
     }
     //Clears all items from slots and inventory count and enables player ability to pick up more items
@@ -86,6 +88,7 @@ public class InventoryManager : MonoBehaviour
         inventoryCounts.Clear();
         playerDropOff.enabled = false;
         dropPopup.SetActive(false);
+        exit.SetActive(true);
     }
 
     //Returns count of pizza in inventory
