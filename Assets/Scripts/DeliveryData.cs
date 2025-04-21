@@ -10,21 +10,23 @@ public class DeliveryData : ScriptableObject
     public List<int> currentOrder;
     public GameObject currentHouse;
     private QuestController questController;
-    private GameController gameController;
 
 
-    public void Initialize()
+    public void InitializePizza()
     {
         questController = FindObjectOfType<QuestController>();
-        gameController = FindObjectOfType<GameController>();
 
-        houses = GameObject.FindGameObjectsWithTag("House");
         deliveryHouses = new Stack<GameObject>();
         pizzaOrders = new Stack<List<int>>();
 
-        GenerateHouses();
         GeneratePizzas();
         questController.Setup();
+    }
+    public IEnumerator InitializeHouses()
+    {
+        houses = GameObject.FindGameObjectsWithTag("House");
+        GenerateHouses();
+        yield return new WaitForSeconds(2f);
     }
 
 
@@ -51,7 +53,7 @@ public class DeliveryData : ScriptableObject
     private void GeneratePizzas()
     {
         //run for loop for each house
-        for (int i = 0; i < deliveryHouses.ToArray().Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             // generate random number of pizzas for order between 1 and 3
             int numPizzas = Random.Range(1, 4);
@@ -72,13 +74,7 @@ public class DeliveryData : ScriptableObject
         if (pizzaOrders.Count > 0)
         {
             currentOrder = pizzaOrders.Pop();
-            currentHouse = deliveryHouses.Pop();
-        }
-        else
-        {
-            currentOrder = null;
-            currentHouse = null;
-            gameController.Win();
+            // currentHouse = deliveryHouses.Pop();
         }
     }
 }

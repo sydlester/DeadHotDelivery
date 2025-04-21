@@ -13,18 +13,22 @@ public class QuestController : MonoBehaviour
     public Stack<List<int>> pizzaOrders;
     public List<int> currentOrder;
     public GameObject currentHouse;
+    [SerializeField] GameController gameController;  
 
     /// PIZZZAs= 0 is cheese, 1 is veggie and 2 is pepperoni
 
     void Start()
     {
-        deliveryData.Initialize();
+        if (deliveryData.pizzaOrders == null) {deliveryData.InitializePizza();}
+        else { 
+            pizzaOrders = deliveryData.pizzaOrders; 
+        }
     }
 
     public void Setup()
     {
         Debug.Log("Setup");
-        deliveryHouses = deliveryData.deliveryHouses;
+        deliveryHouses = null;
         pizzaOrders = deliveryData.pizzaOrders;
         PizzaQuest();
     }
@@ -32,38 +36,47 @@ public class QuestController : MonoBehaviour
 
     public void PizzaQuest()
     {
-        deliveryData.NewOrder();
-        currentOrder = deliveryData.currentOrder;
-        currentHouse = deliveryData.currentHouse;
-        string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
-        Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
-
-        // Count each pizza type
-        foreach (int pizza in currentOrder)
+        Debug.Log("pizzaOrders.Count: " + pizzaOrders.Count);
+        if (pizzaOrders.Count > 0)
         {
-            if (!pizzaCount.ContainsKey(pizza))
-            {
-                pizzaCount[pizza] = 0;
+            deliveryData.NewOrder();
+            currentOrder = deliveryData.currentOrder;
+            if (deliveryHouses != null) {
+                currentHouse = deliveryData.currentHouse;
             }
-            pizzaCount[pizza]++;
-        }
+            string[] pizzaNames = { "cheese", "veggie", "pepperoni" };
+            Dictionary<int, int> pizzaCount = new Dictionary<int, int>();
 
-        // Format order string like "2 pepperoni, 1 cheese"
-        List<string> orderParts = new List<string>();
-        foreach (var pair in pizzaCount)
-        {
-            int flavor = pair.Key;
-            int count = pair.Value;
-
-            if (flavor >= 0 && flavor < pizzaNames.Length)
+            // Count each pizza type
+            foreach (int pizza in currentOrder)
             {
-                string part = count + " " + pizzaNames[flavor];
-                orderParts.Add(part);
+                if (!pizzaCount.ContainsKey(pizza))
+                {
+                    pizzaCount[pizza] = 0;
+                }
+                pizzaCount[pizza]++;
             }
-        }
 
-        string order = string.Join(", ", orderParts);
-        SetQuest("Order: " + order);
+            // Format order string like "2 pepperoni, 1 cheese"
+            List<string> orderParts = new List<string>();
+            foreach (var pair in pizzaCount)
+            {
+                int flavor = pair.Key;
+                int count = pair.Value;
+
+                if (flavor >= 0 && flavor < pizzaNames.Length)
+                {
+                    string part = count + " " + pizzaNames[flavor];
+                    orderParts.Add(part);
+                }
+            }
+
+            string order = string.Join(", ", orderParts);
+            SetQuest("Order: " + order);
+        }
+        else {
+            gameController.Win();
+        }
     
     }
 
@@ -104,11 +117,13 @@ public class QuestController : MonoBehaviour
     //Sets quest to delivery
     public void DeliveryQuest()
     {
-        if (deliveryHouses.Count < 0)
+        deliveryHouses = deliveryData.deliveryHouses;
+        if (deliveryHouses.Count <= 0)
         {
-            SetQuest("Deliver the pizza to [null]");
+            SetQuest("Exit the pizza shop");
             return;
         }
+        currentHouse = deliveryHouses.Pop();
         SetQuest("Deliver the pizza to " + currentHouse.name);
     }
 
