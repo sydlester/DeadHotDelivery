@@ -9,7 +9,8 @@ public class MoveZombie : MonoBehaviour
     public float moveSpeed = 1f;
     public float frameCount = 0;
     public float maxFrameCount = 500;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
+    public bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,10 @@ public class MoveZombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         frameCount++;
         // check if the zombie is close to the player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -31,16 +36,6 @@ public class MoveZombie : MonoBehaviour
             {
                 MoveTowardsPlayer(player.transform.position);
             }
-            else
-            // if not close enough, move randomly
-            {
-                MoveRandomly();
-            }
-        }
-        else
-        // if player is not found, move randomly
-        {
-            MoveRandomly();
         }
     }
 
