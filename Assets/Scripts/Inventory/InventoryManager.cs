@@ -58,7 +58,6 @@ public class InventoryManager : MonoBehaviour
         {
             questController.DeliveryQuest();
             playerPickup.enabled = false;
-            playerDropOff.enabled = true;
         }
     }
     //Clears all items from slots and inventory count and enables player ability to pick up more items
@@ -75,7 +74,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         inventoryCounts.Clear();
-        playerPickup.enabled = true;
         playerDropOff.enabled = false;
         dropPopup.SetActive(false);
     }

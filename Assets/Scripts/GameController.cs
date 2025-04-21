@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public GameOverScreen gameOverScreen;
-    public GameTimer gameTimer;
+    [SerializeField] private GameOverScreen gameOverScreen;
+    private GameTimer gameTimer;
 
     private void Start()
     {
@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     //Initializes Game Over Screen
     public void Win()
     {
-        gameOverScreen.Setup(gameTimer.elapsedTime);
+        // gameOverScreen.Setup(gameTimer.elapsedTime);
+        gameOverScreen.Setup(1f);
     }
 }

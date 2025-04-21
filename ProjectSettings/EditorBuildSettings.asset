@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Shop.unity
+    guid: d4c581c554929465fae43957e8dfd860
+  - enabled: 0
+    path: Assets/Scenes/Street.unity
+    guid: 7303096d4c9104bd5b5046bdcbcdb4f6
+  - enabled: 1
+    path: Assets/Scenes/Phoebe Street.unity
+    guid: 03fb48538053541c585af5bb35bcd505
   m_configObjects: {}
