@@ -7,6 +7,8 @@ public class SwitchWeapon : MonoBehaviour
     private UpdateLocation updateLocation;
     private ManagePlayerWeapon manageWeapons;
     private GameObject player;
+    private bool inputAllowed = false;
+    public Collider2D otherWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -20,33 +22,38 @@ public class SwitchWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!inputAllowed)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+                {
+                    SwitchWeaponTo(otherWeapon);
+                    // update the player's weapon
+                    if (otherWeapon.GetComponent<UpdateLocation>().weaponName == "Sword")
+                    {
+                        manageWeapons.SwitchPlayerWeapon("Sword");
+                    }
+                    else if (otherWeapon.GetComponent<UpdateLocation>().weaponName == "Knife")
+                    {
+                        manageWeapons.SwitchPlayerWeapon("Knife");
+                    }     
+                }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("SwitchWeapon: OnTriggerEnter2D");
+        otherWeapon = other;
+        //Debug.Log("SwitchWeapon: OnTriggerEnter2D");
         if (other.CompareTag("Weapon"))
         {
-            Debug.Log("SwitchWeapon: OnTriggerEnter2D - Weapon");
+            Debug.Log("Overlap Weapon");
             // only trigger for one of the two weapons
             if (updateLocation.inUse)
             {
                 // highlight the weapon
                 other.GetComponent<SpriteRenderer>().color = Color.yellow;
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    SwitchWeaponTo(other);
-                    // update the player's weapon
-                    if (other.GetComponent<UpdateLocation>().weaponName == "Sword")
-                    {
-                        manageWeapons.SwitchPlayerWeapon("Sword");
-                    }
-                    else if (other.GetComponent<UpdateLocation>().weaponName == "Knife")
-                    {
-                        manageWeapons.SwitchPlayerWeapon("Knife");
-                    }     
-                }
+                inputAllowed = true;
             }
         }
     }
@@ -59,7 +66,9 @@ public class SwitchWeapon : MonoBehaviour
             {
                 // reset color
                 other.GetComponent<SpriteRenderer>().color = Color.white;
+                inputAllowed = false;
             }
+            GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 
@@ -71,9 +80,11 @@ public class SwitchWeapon : MonoBehaviour
         // current in use weapon gets put down
         updateLocation.inUse = false;
         transform.position = otherPos;
+        GetComponent<SpriteRenderer>().color = Color.yellow;
 
         // pick up new weapon
         other.GetComponent<UpdateLocation>().inUse = true;
         other.transform.position = inUsePos;
+        other.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
