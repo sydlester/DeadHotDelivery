@@ -8,7 +8,7 @@
 
 ## Game Pitch
 
-Welcome to the zombie apocalypse! You are playing an Davis, an extremely committed pizza delivery boy with a history of outstanding service in the suburbs of North Carolina. Even though zombies have taken over, Davis is not going to let a few zombies get in the way of his 5-star review on Yelp. Start off in the pizza shop, collecting pizzas to complete orders, then venture out into the apocalyptic world to deliver the pizzas to customers. With your trusted knife, and any weapons you find along the way, you must defeat any zombies that block your way to deliver your pizzas as fast as possible. Your customers are counting on you. 
+Welcome to the zombie apocalypse! You are playing as Davis, an extremely committed pizza delivery boy with a history of outstanding service in the suburbs of North Carolina. Even though zombies have taken over, Davis is not going to let a few zombies get in the way of his 5-star review on Yelp. Start off in the pizza shop, collecting pizzas to complete orders, then venture out into the apocalyptic world to deliver the pizzas to customers. With your trusted knife, and any weapons you find along the way, you must defeat any zombies that block your path to deliver the pizzas as fast as possible. Your customers are counting on you. 
 
 ## How to Play
 
