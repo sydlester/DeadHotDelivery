@@ -48,6 +48,7 @@ public class Attack : MonoBehaviour
                 
                 if (Input.GetKeyDown(KeyCode.Q)) // or MouseButtonDown(0)
                 {
+                    GetComponent<AudioSource>().Play();
                     nearestZombie.GetComponent<ZombieHealthController>().TakeDamage(weapon.damage);
                     nextAttackTime = Time.time + weapon.cd;
                 }

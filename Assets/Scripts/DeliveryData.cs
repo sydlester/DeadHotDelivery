@@ -76,4 +76,15 @@ public class DeliveryData : ScriptableObject
             currentOrder = pizzaOrders.Pop();
         }
     }
+
+    public void ResetValues()
+    {
+        questController = null;
+        houses = null;
+        deliveryHouseNames.Clear();
+        pizzaOrders.Clear();
+        currentOrder.Clear();
+        currentHouse = null;
+    }
+
 }

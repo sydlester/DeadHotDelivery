@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PizzaQuestController : QuestController
 {
@@ -72,7 +73,7 @@ public class PizzaQuestController : QuestController
         }
         else
         {
-            gameController.Win();
+            SceneManager.LoadScene("WinScreen");
         }
 
     }
