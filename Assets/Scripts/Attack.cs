@@ -10,6 +10,13 @@ public class Attack : MonoBehaviour
     private float nextAttackTime = 0f;
 
     public Weapon weapon; 
+    public GameObject attackPopup;
+
+    void Start()
+    {
+        attackPopup = GameObject.Find("AttackPopup");
+        attackPopup.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,6 +40,11 @@ public class Attack : MonoBehaviour
             {
                 // highlight
                 nearestZombie.GetComponent<SpriteRenderer>().color = Color.yellow;
+
+                if (attackPopup != null)
+                {
+                    attackPopup.SetActive(true);
+                }
                 
                 if (Input.GetKeyDown(KeyCode.Q)) // or MouseButtonDown(0)
                 {
@@ -44,6 +56,12 @@ public class Attack : MonoBehaviour
             {
                 // Reset color if not in range
                 nearestZombie.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+        if (nearestZombie == null) {
+            if (attackPopup != null)
+            {
+                attackPopup.SetActive(false);
             }
         }
     }

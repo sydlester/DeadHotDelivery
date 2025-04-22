@@ -9,6 +9,8 @@ public class SwitchWeapon : MonoBehaviour
     private GameObject player;
     private bool inputAllowed = false;
     public Collider2D otherWeapon;
+    public GameObject pickupPopup;
+    public bool canPickup = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,8 @@ public class SwitchWeapon : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         manageWeapons = player.GetComponent<ManagePlayerWeapon>();
         // Debug.Log("SwitchWeapon: Start");
+        pickupPopup = GameObject.Find("PickupPopup");
+        pickupPopup.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,9 +30,18 @@ public class SwitchWeapon : MonoBehaviour
         {
             return;
         }
+        if (!canPickup)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.E))
                 {
                     SwitchWeaponTo(otherWeapon);
+                    canPickup = false;
+                    if (pickupPopup != null)
+                    {
+                        pickupPopup.SetActive(true);
+                    }
                     // update the player's weapon
                     if (otherWeapon.GetComponent<UpdateLocation>().weaponName == "Sword")
                     {
@@ -52,8 +65,13 @@ public class SwitchWeapon : MonoBehaviour
             if (updateLocation.inUse)
             {
                 // highlight the weapon
+                canPickup = true;
                 other.GetComponent<SpriteRenderer>().color = Color.yellow;
                 inputAllowed = true;
+                if (pickupPopup != null)
+                {
+                    pickupPopup.SetActive(true);
+                }
             }
         }
     }
@@ -69,6 +87,11 @@ public class SwitchWeapon : MonoBehaviour
                 inputAllowed = false;
             }
             GetComponent<SpriteRenderer>().color = Color.white;
+            canPickup = false;
+            if (pickupPopup != null)
+            {
+                pickupPopup.SetActive(false);
+            }
         }
     }
 
@@ -78,13 +101,26 @@ public class SwitchWeapon : MonoBehaviour
         Vector2 otherPos = other.transform.position;
 
         // current in use weapon gets put down
-        updateLocation.inUse = false;
+        updateLocation.inUse = !(updateLocation.inUse);
         transform.position = otherPos;
-        GetComponent<SpriteRenderer>().color = Color.yellow;
+        SwitchColors(GetComponent<SpriteRenderer>(), updateLocation.inUse);
 
         // pick up new weapon
-        other.GetComponent<UpdateLocation>().inUse = true;
+        other.GetComponent<UpdateLocation>().inUse = !(other.GetComponent<UpdateLocation>().inUse);
         other.transform.position = inUsePos;
-        other.GetComponent<SpriteRenderer>().color = Color.white;
+        SwitchColors(other.GetComponent<SpriteRenderer>(), other.GetComponent<UpdateLocation>().inUse);
+
+    }
+
+    void SwitchColors(SpriteRenderer spriteRenderer, bool inUse)
+    {
+        if (!inUse)
+        {
+            spriteRenderer.color = Color.yellow;
+        }
+        else if (inUse)
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 }
