@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(RectTransform))]
+//helper to resize the background of the quest text
 public class ResizeBackgroundWidthOnly : MonoBehaviour
 {
     public TextMeshProUGUI targetText;   

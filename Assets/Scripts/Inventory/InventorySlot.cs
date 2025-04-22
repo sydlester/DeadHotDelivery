@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class InventorySlot : MonoBehaviour
 {
+    //class is used to hold the item in the inventory slot
     public GameObject heldItem;
     public void SetHeldItem(GameObject item)
     {
         heldItem = item;
-        heldItem.transform.SetParent(transform, false); // Use false to preserve UI scale
+        heldItem.transform.SetParent(transform, false); 
         heldItem.transform.localPosition = Vector3.zero;
 
     }

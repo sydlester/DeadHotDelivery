@@ -14,7 +14,7 @@ public class DeliveryQuestController : QuestController
     {
         StartCoroutine(WaitThenStartDeliveryQuest());
     }
-
+    //makes sure houses are initialized before starting delivery quest
     private IEnumerator WaitThenStartDeliveryQuest()
     {
         Debug.Log("Waiting for houses to initialize...");
@@ -69,7 +69,7 @@ public class DeliveryQuestController : QuestController
             return false;
     }
 
-    //Sets quest to delivery
+    //Sets quest to delivery at next house
     public void DeliveryQuest()
     {
         string houseName = deliveryData.deliveryHouseNames[deliveryData.deliveryHouseNames.Count - 1];

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7490041408744773919}
   - component: {fileID: 5716157730352408025}
   - component: {fileID: 760233206995454895}
+  - component: {fileID: 5733199128118649904}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Zombie
@@ -206,7 +207,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 97dbadf30c47c4845a56e618a48a5a87, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.067
   m_Pitch: 1
   Loop: 1
@@ -335,3 +336,15 @@ MonoBehaviour:
   maxFrameCount: 500
   rb: {fileID: 0}
   canMove: 1
+--- !u!114 &5733199128118649904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287536856139032803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af28f3d3b63b24de9ae63a0b65df691b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

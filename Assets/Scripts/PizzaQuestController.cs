@@ -15,25 +15,27 @@ public class PizzaQuestController : QuestController
 
     void Start()
     {
+        //if no pizzaOrders is empty, generate pizza
         if (deliveryData.pizzaOrders == null) { deliveryData.InitializePizza(); }
         else
         {
-            Setup();
+            PizzaQuest();
         }
     }
-
-    public void Setup()
-    {
-        pizzaOrders = deliveryData.pizzaOrders;
-        PizzaQuest();
-    }
+    
+    // public void Setup()
+    // {
+    //     pizzaOrders = deliveryData.pizzaOrders;
+    //     PizzaQuest();
+    // }
 
 
     public void PizzaQuest()
     {
-        Debug.Log("pizzaOrders.Count: " + pizzaOrders.Count);
+        pizzaOrders = deliveryData.pizzaOrders;
         if (pizzaOrders.Count > 0)
         {
+            //Get new order
             deliveryData.NewOrder();
             currentOrder = deliveryData.currentOrder;
     
@@ -64,6 +66,7 @@ public class PizzaQuestController : QuestController
                 }
             }
 
+            // Display in quest text
             string order = string.Join(", ", orderParts);
             SetQuest("Order: " + order);
         }
