@@ -21,7 +21,7 @@ public class DeliveryData : ScriptableObject
         pizzaOrders = new Stack<List<int>>();
 
         GeneratePizzas();
-        questController.Setup();
+        questController.PizzaQuest();
     }
 
     //Generates 2 random houses out of the buldings tagged "House"
@@ -69,6 +69,7 @@ public class DeliveryData : ScriptableObject
 
     }
 
+    //pops off new order
     public void NewOrder() {
         if (pizzaOrders.Count > 0)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 public class RandomZombieNoise : MonoBehaviour
 {
     private AudioSource audioSource;
-
+    //randomizes the start of each zombie noise
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
