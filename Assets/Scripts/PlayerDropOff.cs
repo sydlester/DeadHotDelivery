@@ -4,7 +4,7 @@ using TMPro;
 public class PlayerDropOff : MonoBehaviour
 {
     public InventoryManager im;
-    public float dropRadius = 1.5f;
+    public float dropRadius = 2f;
     public GameObject dropPopup; 
     [SerializeField] DeliveryQuestController questController;
     [SerializeField] DeliveryData deliveryData;

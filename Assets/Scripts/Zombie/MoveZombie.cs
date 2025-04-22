@@ -29,7 +29,7 @@ public class MoveZombie : MonoBehaviour
         if (player != null)
         {
             float distance = Vector2.Distance(rb.position, player.transform.position);
-            if (distance < 8f)
+            if (distance < 10f)
             // if close enough, move towards the player
             {
                 MoveTowardsPlayer(player.transform.position);
