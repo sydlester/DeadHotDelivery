@@ -19,12 +19,6 @@ public class PlayerHealthController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
