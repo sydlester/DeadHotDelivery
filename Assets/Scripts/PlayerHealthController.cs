@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class PlayerHealthController : MonoBehaviour
 {
@@ -17,12 +18,6 @@ public class PlayerHealthController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void TakeDamage(int amount)
@@ -59,5 +54,6 @@ public class PlayerHealthController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene("DeathScreen"); 
     }
 }

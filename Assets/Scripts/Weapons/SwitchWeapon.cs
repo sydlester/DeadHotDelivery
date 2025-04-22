@@ -38,10 +38,6 @@ public class SwitchWeapon : MonoBehaviour
                 {
                     SwitchWeaponTo(otherWeapon);
                     canPickup = false;
-                    if (pickupPopup != null)
-                    {
-                        pickupPopup.SetActive(true);
-                    }
                     // update the player's weapon
                     if (otherWeapon.GetComponent<UpdateLocation>().weaponName == "Sword")
                     {
@@ -51,6 +47,10 @@ public class SwitchWeapon : MonoBehaviour
                     {
                         manageWeapons.SwitchPlayerWeapon("Knife");
                     }     
+                    if (pickupPopup != null)
+                    {
+                        pickupPopup.SetActive(false);
+                    }
                 }
     }
 
@@ -60,6 +60,11 @@ public class SwitchWeapon : MonoBehaviour
         //Debug.Log("SwitchWeapon: OnTriggerEnter2D");
         if (other.CompareTag("Weapon"))
         {
+            if (pickupPopup != null)
+                {
+                    Debug.Log("Pickup Popup");
+                    pickupPopup.SetActive(true);
+                }
             Debug.Log("Overlap Weapon");
             // only trigger for one of the two weapons
             if (updateLocation.inUse)
@@ -68,10 +73,6 @@ public class SwitchWeapon : MonoBehaviour
                 canPickup = true;
                 other.GetComponent<SpriteRenderer>().color = Color.yellow;
                 inputAllowed = true;
-                if (pickupPopup != null)
-                {
-                    pickupPopup.SetActive(true);
-                }
             }
         }
     }
