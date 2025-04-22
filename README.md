@@ -47,16 +47,16 @@ If a player successfully completes three pizza deliveries, they win the game and
 ## Packages Used
 
 1. Pixel Crawler Asset Pack
-- Author: Anokolisa
-- URL: https://anokolisa.itch.io/free-pixel-art-asset-pack-topdown-tileset-rpg-16x16-sprites
-- Used for: Sprites, houses, street design, inventory, weapons
+    - Author: Anokolisa
+    - URL: https://anokolisa.itch.io/free-pixel-art-asset-pack-topdown-tileset-rpg-16x16-sprites
+    - Used for: Sprites, houses, street design, inventory, weapons
 
 2. Zombie Apocalypse Tileset
-- Author: Ittai Manero
-- URL: https://ittaimanero.itch.io/zombie-apocalypse-tileset
-- Used for: Ground tiles on street level 
+    - Author: Ittai Manero
+    - URL: https://ittaimanero.itch.io/zombie-apocalypse-tileset
+    - Used for: Ground tiles on street level 
 
 3. Pixel World Interior 
-- Authot: Mrdackerchan
-- URL: https://mrdakerchan.itch.io/top-down-pixel-interior
-- Used for: Interior design of pizza shop
+    - Authot: Mrdackerchan
+    - URL: https://mrdakerchan.itch.io/top-down-pixel-interior
+    - Used for: Interior design of pizza shop
