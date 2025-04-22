@@ -20,7 +20,10 @@ public class SwitchWeapon : MonoBehaviour
         manageWeapons = player.GetComponent<ManagePlayerWeapon>();
         // Debug.Log("SwitchWeapon: Start");
         pickupPopup = GameObject.Find("PickupPopup");
-        pickupPopup.SetActive(false);
+        if (pickupPopup != null)
+        {
+            pickupPopup.SetActive(false);
+        }
     }
 
     // Update is called once per frame
