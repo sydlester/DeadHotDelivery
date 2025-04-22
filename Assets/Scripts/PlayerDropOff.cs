@@ -8,6 +8,7 @@ public class PlayerDropOff : MonoBehaviour
     public GameObject dropPopup; 
     [SerializeField] DeliveryQuestController questController;
     [SerializeField] DeliveryData deliveryData;
+    AudioSource[] audioSources;
 
     void Update()
     {
@@ -22,15 +23,18 @@ public class PlayerDropOff : MonoBehaviour
                 showPopup = true;
                 if (Input.GetKeyDown(KeyCode.R))
                 {
+                    audioSources = nearestItem.GetComponents<AudioSource>();
+                    Debug.Log(audioSources.Length);
                     if (questController.currentHouse.name == nearestItem.name)
                     {
-                        nearestItem.GetComponent<AudioSource>().Play();
+                        audioSources[0].Play();
                         im.ClearInventory();
                         showPopup = false;
                         questController.SetQuest("Return to the Pizza Place!");
                     }
                     else
                     {
+                        audioSources[1].Play();
                         Debug.Log("Wrong house!");
                     }
                 }
